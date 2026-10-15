@@ -2299,3 +2299,28 @@ body { background: #050505 !important; }
 .lyr-line:empty {
   height: 8px;
 }
+
+/* Lyrics karaoke effect */
+.lyr-text-wrap .lyr-line {
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: left center;
+}
+.lyr-text-wrap .lyr-line.far {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 15px;
+  opacity: 0.5;
+}
+.lyr-text-wrap .lyr-line.near {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 16px;
+  opacity: 0.85;
+}
+.lyr-text-wrap .lyr-line.current {
+  color: #00e0d0;
+  font-weight: 800;
+  font-size: 22px;
+  text-shadow: 0 0 20px rgba(0, 224, 208, 0.7), 0 0 40px rgba(0, 224, 208, 0.4);
+  transform: scale(1.05);
+  opacity: 1;
+  letter-spacing: 0.3px;
+}

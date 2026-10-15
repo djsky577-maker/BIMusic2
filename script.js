@@ -3702,15 +3702,28 @@ function startLyricsSync(){
     if(!wrap) return;
     var lines = wrap.querySelectorAll('.lyr-line');
     lines.forEach(function(el, i){
-      if(i === curIdx) el.classList.add('current');
-      else el.classList.remove('current');
+      var dist = Math.abs(i - curIdx);
+      el.classList.remove('current');
+      el.classList.remove('near');
+      el.classList.remove('far');
+      if(i === curIdx){
+        el.classList.add('current');
+      } else if(dist <= 2){
+        el.classList.add('near');
+      } else {
+        el.classList.add('far');
+      }
     });
     if(curIdx >= 0 && lines[curIdx]){
-      var el = lines[curIdx];
-      var offset = el.offsetTop - wrap.clientHeight / 2 + el.clientHeight / 2;
-      document.getElementById('lyricsBodyActive').scrollTo({ top: offset, behavior: 'smooth' });
+      var target = lines[curIdx];
+      var container = document.getElementById('lyricsBodyActive');
+      if(container){
+        var offset = target.offsetTop - container.clientHeight / 2 + target.clientHeight / 2;
+        if(offset < 0) offset = 0;
+        container.scrollTo({ top: offset, behavior: 'smooth' });
+      }
     }
-  }, 500);
+  }, 300);
 }
 
 function stopLyricsSync(){
